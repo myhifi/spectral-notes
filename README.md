@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎃 Spectral Notes
 
-## Getting Started
+> **Built for the Kiroween 2026 Hackathon (Costume Contest Category)**  
+> *Unfinished thoughts turn haunted after 24 hours. Complete them before they come back to haunt you.*
 
-First, run the development server:
+🔗 **Live Demo:** [https://spectral-notes.vercel.app/](https://spectral-notes.vercel.app/)  
+🎥 **Video Demo:** [Watch on YouTube](https://youtu.be/rymJKhx8qpE)  
+📝 **Blog Post:** [Building "Spectral Notes" with Kiro](https://dev.to/me_y_fb1f776419302946b34e/building-spectral-notes-a-haunted-productivity-app-with-kiro-156)
 
+---
+
+## 👻 What is Spectral Notes?
+**Spectral Notes** is a minimalist productivity web application with a spooky twist. When you add a task or note, a 24-hour countdown begins. If you procrastinate and leave it uncompleted past 24 hours, the note becomes **"haunted"**—turning blood-red, flickering with eerie animations, and summoning a ghost icon until you complete ("exorcise") it.
+
+## 🛠️ Built With
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4
+- **Animations:** Framer Motion
+- **Language:** TypeScript
+- **AI Development Environment:** Kiro IDE
+
+## ⚡ How Kiro IDE Powered This Project
+- **Spec-Driven Development (`.kiro/specs`):** Defined the core requirements, 24-hour haunting threshold logic, and Framer Motion states to generate clean custom React hooks (`useSpectralNotes`) and components.
+- **Steering Docs (`.kiro/steering`):** Locked in the Tailwind v4 spooky color palette (`bg-surface`, `text-blood`) and coding conventions across the entire project without repetitive prompting.
+- **Agent Hooks:** Automated formatting and consistency checks on save.
+
+## 🚀 Running Locally
 ```bash
+git clone [https://github.com/myhifi/spectral-notes.git](https://github.com/myhifi/spectral-notes.git)
+cd spectral-notes
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open http://localhost:3000 in your browser.
