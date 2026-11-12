@@ -1,0 +1,10 @@
+{
+  "name": "Format Code on Save",
+  "description": "Automatically format TypeScript and TSX files using Prettier.",
+  "events": ["file_save"],
+  "file_patterns": ["**/*.ts", "**/*.tsx"],
+  "action": {
+    "type": "command",
+    "command": "npx prettier --write ${file}"
+  }
+}
