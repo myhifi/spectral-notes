@@ -1,69 +1,72 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { Ghost, Plus } from "lucide-react";
+import { motion } from "framer-motion";
+import NoteList from "@/components/NoteList";
+import { useSpectralNotes } from "@/lib/useSpectralNotes";
 
 export default function Home() {
+  const [input, setInput] = useState("");
+  const { notes, addNote, toggleComplete, removeNote, makeNoteOld, isLoaded } = useSpectralNotes();
+
+  if (!isLoaded) return null; // Prevent hydration mismatch
+
+  const handleAddNote = () => {
+    addNote(input);
+    setInput("");
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen py-16 px-4 md:px-8 flex flex-col items-center">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-2xl flex flex-col items-center mb-12 text-center"
+      >
+        <Ghost className="w-16 h-16 text-blood mb-4 animate-float" />
+        <h1 className="text-5xl md:text-6xl font-spooky text-ghost mb-4 tracking-wider drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+          Spectral Notes
+        </h1>
+        <p className="text-ghost-muted text-lg max-w-md">
+          Unfinished thoughts become haunted after 24 hours. Complete them before they come back to haunt you.
+        </p>
+      </motion.div>
+
+      <div className="w-full max-w-2xl">
+        {/* Input Area */}
+        <div className="bg-surface border border-surface-light rounded-xl p-2 flex gap-2 shadow-lg focus-within:border-blood transition-colors">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleAddNote();
+              }
+            }}
+            placeholder="Write a note... (Enter to save, Shift+Enter for newline)"
+            className="flex-1 bg-transparent text-ghost placeholder-ghost-muted p-3 resize-none focus:outline-none h-14"
+          />
+          <button
+            onClick={handleAddNote}
+            className="bg-blood hover:bg-blood-light text-white p-3 rounded-lg transition-colors flex items-center justify-center shrink-0 self-end mb-1 mr-1"
+            aria-label="Add Note"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Plus size={20} />
+          </button>
         </div>
-      </main>
-    </div>
+
+        {/* Notes List */}
+        <div className="mt-8">
+          <NoteList 
+            notes={notes} 
+            onToggle={toggleComplete} 
+            onDelete={removeNote} 
+            onMakeOld={makeNoteOld}
+          />
+        </div>
+      </div>
+    </main>
   );
 }
