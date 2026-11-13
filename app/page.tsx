@@ -5,21 +5,40 @@ import { Ghost, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import NoteList from "@/components/NoteList";
 import { useSpectralNotes } from "@/lib/useSpectralNotes";
+import { playSound } from "@/lib/audio";
 
 export default function Home() {
   const [input, setInput] = useState("");
-  const { notes, addNote, toggleComplete, removeNote, makeNoteOld, isLoaded } = useSpectralNotes();
+  const { notes, addNote, toggleComplete, removeNote, makeNoteOld, isLoaded } =
+    useSpectralNotes();
 
   if (!isLoaded) return null; // Prevent hydration mismatch
 
   const handleAddNote = () => {
+    if (!input.trim()) return;
     addNote(input);
     setInput("");
+    playSound("click");
+  };
+
+  // Wrap toggleComplete: play the exorcise chime only when completing a note
+  const handleToggle = (id: string) => {
+    const note = notes.find((n) => n.id === id);
+    if (note && !note.completed) {
+      playSound("exorcise");
+    }
+    toggleComplete(id);
+  };
+
+  // Wrap makeNoteOld: play the haunting sound alongside the debug action
+  const handleMakeOld = (id: string) => {
+    makeNoteOld(id);
+    playSound("haunted");
   };
 
   return (
     <main className="min-h-screen py-16 px-4 md:px-8 flex flex-col items-center">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-2xl flex flex-col items-center mb-12 text-center"
@@ -29,7 +48,8 @@ export default function Home() {
           Spectral Notes
         </h1>
         <p className="text-ghost-muted text-lg max-w-md">
-          Unfinished thoughts become haunted after 24 hours. Complete them before they come back to haunt you.
+          Unfinished thoughts become haunted after 24 hours. Complete them
+          before they come back to haunt you.
         </p>
       </motion.div>
 
@@ -59,11 +79,11 @@ export default function Home() {
 
         {/* Notes List */}
         <div className="mt-8">
-          <NoteList 
-            notes={notes} 
-            onToggle={toggleComplete} 
-            onDelete={removeNote} 
-            onMakeOld={makeNoteOld}
+          <NoteList
+            notes={notes}
+            onToggle={handleToggle}
+            onDelete={removeNote}
+            onMakeOld={handleMakeOld}
           />
         </div>
       </div>

@@ -32,3 +32,22 @@ npm install
 npm run dev
 
 Open http://localhost:3000 in your browser.
+
+## 🎵 Audio Assets & Credits
+
+Sound effects used in this project are royalty-free and sourced from [Freesound](https://freesound.org/):
+
+* **Click Sound (`click.mp3`):**  
+  * **Original Title:** SFX UI Button Click  
+  * **Author:** suntemple  
+  * **License:** [Creative Commons 0 (CC0)](https://creativecommons.org/publicdomain/zero/1.0/)  
+
+* **Exorcise Chime (`exorcise.mp3`):**  
+  * **Original Title:** Fantasy Achievement Unlock - Magical Stinger  
+  * **Author:** TommasoMotteran  
+  * **License:** [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)  
+
+* **Haunted Ghost Whisper (`haunted.mp3`):**  
+  * **Original Title:** whisper ghost horror scream sound effect (Edited/Trimmed to a single tone)  
+  * **Author:** Garuda1982  
+  * **License:** [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
