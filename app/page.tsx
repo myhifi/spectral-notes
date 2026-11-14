@@ -36,6 +36,12 @@ export default function Home() {
     playSound("haunted");
   };
 
+  // Wrap removeNote: play the delete whoosh
+  const handleDelete = (id: string) => {
+    removeNote(id);
+    playSound("delete");
+  };
+
   return (
     <main className="min-h-screen py-16 px-4 md:px-8 flex flex-col items-center">
       <motion.div
@@ -82,7 +88,7 @@ export default function Home() {
           <NoteList
             notes={notes}
             onToggle={handleToggle}
-            onDelete={removeNote}
+            onDelete={handleDelete}
             onMakeOld={handleMakeOld}
           />
         </div>
