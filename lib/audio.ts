@@ -3,12 +3,13 @@
 // Uses the Web Audio API's HTMLAudioElement — safe to call server-side
 // (the typeof window guard prevents any execution during SSR).
 
-export type SoundId = "click" | "exorcise" | "haunted";
+export type SoundId = "click" | "exorcise" | "haunted" | "delete";
 
 const SOUND_PATHS: Record<SoundId, string> = {
   click: "/sounds/click.mp3",
   exorcise: "/sounds/exorcise.mp3",
   haunted: "/sounds/haunted.mp3",
+  delete: "/sounds/Delete.mp3", // Matches your capital 'D' filename
 };
 
 // Cache Audio instances so repeated calls don't re-fetch the files
@@ -19,9 +20,6 @@ const audioCache: Partial<Record<SoundId, HTMLAudioElement>> = {};
  * - Called during SSR (no window)
  * - The browser blocks autoplay
  * - The file fails to load
- *
- * @param id - One of "click" | "exorcise" | "haunted"
- * @param volume - Playback volume between 0 and 1 (default 0.6)
  */
 export function playSound(id: SoundId, volume = 0.6): void {
   if (typeof window === "undefined") return;
