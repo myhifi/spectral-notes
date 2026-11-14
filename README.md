@@ -4,7 +4,7 @@
 > *Unfinished thoughts turn haunted after 24 hours. Complete them before they come back to haunt you.*
 
 🔗 **Live Demo:** [https://spectral-notes.vercel.app/](https://spectral-notes.vercel.app/)  
-🎥 **Video Demo:** [Watch on YouTube](https://youtu.be/rymJKhx8qpE)  
+🎥 **Video Demo:** [Watch on YouTube](https://youtu.be/vrbc4nniHHw)  
 📝 **Blog Post:** [Building "Spectral Notes" with Kiro](https://dev.to/me_y_fb1f776419302946b34e/building-spectral-notes-a-haunted-productivity-app-with-kiro-156)
 
 ---
